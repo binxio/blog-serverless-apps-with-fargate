@@ -1,0 +1,15 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'serverless-apps-with-fargate - Elastic Container Registry (ECR)'
+
+Resources:
+  Registry:
+    Type: AWS::ECR::Repository
+
+Outputs:
+  RegistryName:
+    Description: The name of the registry
+    Value: !Ref Registry
+  RegistryArn:
+    Description: The arn of the registry
+    Value: !GetAtt Registry.Arn

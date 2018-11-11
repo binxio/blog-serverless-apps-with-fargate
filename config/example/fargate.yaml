@@ -1,0 +1,13 @@
+template_path: templates/fargate.yaml
+dependencies:
+  - ecr
+hooks:
+  before_create:
+    - !cmd ./docker-build.sh
+    - !cmd ./docker-push.sh
+    - !cmd ./docker-write-image-url.sh
+  before_delete:
+    - !cmd ./aws-ecr-delete-images.sh
+parameters:
+  ServiceName: 'actors'
+  ImageUrl: !file_contents docker_image_url.txt
